@@ -1,4 +1,4 @@
-# **Finding Lane Lines on the Road** 
+# **Finding Lane Lines on the Road**
 
 ## Writeup Template
 
@@ -15,13 +15,13 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./rawImage.jpg "Raw Image"
-[image2]: ./grayscale.jpg "Grayscale"
-[image3]: ./guassian.jpg "Gaussian Smoothened Grayscale"
-[image4]: ./canny.jpg "Canny applied grayScale"
-[image5]: ./region.jpg "Region selected Canny"
-[image6]: ./hough.jpg "Hough transformed"
-[image7]: ./final.jpg "Original with Hough overlay"
+[image1]: ./test_images_output/rawImage1.jpg "Raw Image"
+[image2]: ./test_images_output/grayscale1.jpg "Grayscale"
+[image3]: ./test_images_output/guassian1.jpg "Gaussian Smoothened Grayscale"
+[image4]: ./test_images_output/canny1.jpg "Canny applied grayScale"
+[image5]: ./test_images_output/region1.jpg "Region selected Canny"
+[image6]: ./test_images_output/hough1.jpg "Hough transformed"
+[image7]: ./test_images_output/final1.jpg "Original with Hough overlay"
 
 ---
 
@@ -29,7 +29,7 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consists of 5 steps. The first step was to convert the raw image that was read in to grayscale to extract a single colour channel. I then performed gaussian smoothening, which is equivalent to passing the image through a low pass filter. The third step was to apply the Canny Edge Detection (transform) on the single-channel grayscale image. The thresholds for edge detection were chosen based on trial and error, with the goal of ensuring that the lanes edges are detected clearly. I then defined a region of interest - a fixed quadrilateral area of the image that encompasses the lane markings. The rest of the image is ignored and the pixels are set to black. I attempted to simplify the definition of the vertices of the region of interest using a function quadVertices(). The final step was to apply the Hough Transform on this region-selected image and overlay the identified lane markings on the original image. The Hough Transform parameters were also chosen by trial and error, applying the pipeline on all the test images and selecting the average. 
+My pipeline consists of 5 steps. The first step was to convert the raw image that was read in to grayscale to extract a single colour channel. I then performed gaussian smoothening, which is equivalent to passing the image through a low pass filter. The third step was to apply the Canny Edge Detection (transform) on the single-channel grayscale image. The thresholds for edge detection were chosen based on trial and error, with the goal of ensuring that the lanes edges are detected clearly. I then defined a region of interest - a fixed quadrilateral area of the image that encompasses the lane markings. The rest of the image is ignored and the pixels are set to black. I attempted to simplify the definition of the vertices of the region of interest using a function quadVertices(). The final step was to apply the Hough Transform on this region-selected image and overlay the identified lane markings on the original image. The Hough Transform parameters were also chosen by trial and error, applying the pipeline on all the test images and selecting the average.
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by identifying that the left and right lane lines have opposing slopes. I expanded the draw_lines() function to first, classify all the detected lines from the Hough Transform into positive and negative slopes. Second, I applied the constraint that the lane lines must start at the base of the image. Third was to use the line equation (y = Ax + B) to identify the x and y coordinates of the end points of the line.
 
@@ -59,7 +59,7 @@ The images shown below give an overview on the 5 steps of the pipeline:
 
 One potential shortcoming would be what would happen when the road has a higher degree of curvature. The current pipeline fails to detect the lanes when applied to the optional challenge video.  
 
-Another shortcoming could be when there is traffic. If, for example, there are cars within the region of interest, then the pipeline would fail. 
+Another shortcoming could be when there is traffic. If, for example, there are cars within the region of interest, then the pipeline would fail.
 
 
 ### 3. Suggest possible improvements to your pipeline
